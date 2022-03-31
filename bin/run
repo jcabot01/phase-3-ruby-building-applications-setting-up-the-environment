@@ -1,7 +1,14 @@
+# this is called the 'shebang' line.  It makes our file run smoothly.  With the proper config we should be able to run the file without typing 'ruby' first.
 #!/usr/bin/env ruby 
 
-require_relative '../lib/garden.rb'
-require_relative '../lib/plant.rb'
+# notice the the 'run' file doesn't have an extension of '.rb'.  That makes it an executable file.
+
+# require_relative '../lib/garden.rb'   #this was not commented-out originally, we did it to pass the tests.  Instead, we pass in config/environment path to fufill 'require_relative'
+# require_relative '../lib/plant.rb'
+
+# require necessary 'lib' files to run our application.  If we add more files, we have to require them.
+
+# now we can run some simple instances
 
 lawn = Garden.new(name: 'Front Lawn')
 
@@ -12,3 +19,28 @@ cucumber = Plant.new(name: 'Cucumber')
 cucumber.garden = lawn
 
 p lawn.plants
+
+#============================================================================================
+# if we have test files, we have to 'require' the 'lib' files in there too.  So instead of having to do twice the work, we create a 'environment.rb' file (in the 'config' folder)that does the 'require' once, then company the environment path into this bin file:
+
+#!/usr/bin/env ruby
+
+require_relative '../config/environment'
+
+# lawn = Garden.new(name: 'Front Lawn')
+
+# basil = Plant.new(name: 'Basil')
+# basil.garden = lawn
+
+# cucumber = Plant.new(name: 'Cucumber')
+# cucumber.garden = lawn
+
+# p lawn.plants
+
+#==========================================================================
+
+# this goes in the config/environment.rb file:
+# require_relative '../lib/garden'
+# require_relative '../lib/plant'
+
+# this is also a great place to configure access to a database.
